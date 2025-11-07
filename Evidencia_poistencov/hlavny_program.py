@@ -5,11 +5,13 @@ from vyhladaj_poistenca import HladanyPoistenec, RozhranieHladanehoPoistenca
 from validacia_vstupu import ValidaciaVstupu
 from zobrazenie_menu import ZobrazenieMenu
 
-"""Vytvorenie inštancií, pre zobrazene menu, databázy a validácií"""
+"""Zobrazíme menu – vytvoríme dočasnú inštanciu ZobrazenieMenu a hneď zavoláme metódu zobraz_menu().
+Následne vytvoríme inštanciu databázy a inštanciu validátora, ktoré budeme používať počas behu aplikácie."""
 ZobrazenieMenu().zobraz_menu()
 databaza = DatabazaPoistencov()
 validacia_vstupu = ValidaciaVstupu()
 
+"""Hlavný cyklus aplikácie"""
 proces = True
 while proces:
     moznost = validacia_vstupu.ziskaj_volbu()
