@@ -1,13 +1,18 @@
-class RozhranieHladanehoPoistenca:
-    """Trieda zabezpečuje získanie mena a priezviska hľadaného poistenca od používateľa"""
-    @staticmethod
-    def ziskaj_hladaneho_poistenca() -> tuple[str, str]:
-        """Metóda získa meno a priezvisko hľadaného poistenca a vrácia ich ako n-ticu"""
+class DatabazaPoistencov:
+    """Reprezentuje databázu poistencov."""
 
-        meno_hladaneho = input(f"Zadajte meno hľadaného poistenca: ").strip()
-        priezvisko_hladaneho = input(f"Zadajte priezvisko hľadaného poistenca: ").strip()
-        return meno_hladaneho, priezvisko_hladaneho
+    def __init__(self):
+        """Inicializujeme sukromný prázdny zoznam."""
+        self._poistenci = []
 
+    def pridaj_poistenca(self,poistenec):
+        """Pridá poistenca do databázy."""
+        self._poistenci.append(poistenec)
+
+    @property
+    def poistenci(self):
+        """Pre spristupnenie iným metódam bez možnosti modifikácie."""
+        return tuple(self._poistenci)
 
 class HladanyPoistenec:
     """Vyhľadá poistenca v databáze podľa mena a priezviska"""
@@ -23,3 +28,5 @@ class HladanyPoistenec:
                 print(f"\nÚdaje poistenca: {poistenec}\nPokračujte ľubovoľnou klavesou.")
                 return
         print("Poistenec sa nenašiel.\nPokračujte ľuobovoľnou klavesou.")
+
+

@@ -1,9 +1,8 @@
 """Importy"""
-from databaza_poistencov import DatabazaPoistencov, ZoznamPoistencov
-from vstupy_pouzivatela import  EvidenciaPoistenca
-from vyhladaj_poistenca import HladanyPoistenec, RozhranieHladanehoPoistenca
-from validacia_vstupu import ValidaciaVstupu
-from zobrazenie_menu import ZobrazenieMenu
+from evidencia import DatabazaPoistencov, HladanyPoistenec
+from vstupy import  EvidenciaPoistenca
+from validacia import ValidaciaVstupu
+from menu import ZobrazenieMenu, ZoznamPoistencov , RozhranieHladanehoPoistenca
 
 """Zobrazíme menu – vytvoríme dočasnú inštanciu ZobrazenieMenu a hneď zavoláme metódu zobraz_menu().
 Následne vytvoríme inštanciu databázy a inštanciu validátora, ktoré budeme používať počas behu aplikácie."""

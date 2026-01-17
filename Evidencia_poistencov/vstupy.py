@@ -1,5 +1,5 @@
 from poistenec import Poistenec
-from validacia_vstupu import ValidaciaVstupu
+from validacia import ValidaciaVstupu
 
 class VstupyUzivatela:
     """Ziskáva vstúpne údaje poistenca"""

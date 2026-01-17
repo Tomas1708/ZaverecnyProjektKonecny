@@ -10,3 +10,4 @@ class Poistenec:
     def __str__(self) -> str:
         """Vratí textovú reprezentáciu poistenca"""
         return f"{self.meno} {self.priezvisko} | Tel. číslo: {self.telefonne_cislo} | Vek: {self.vek}"
+
