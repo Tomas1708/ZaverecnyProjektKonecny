@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Poistenie{% endblock %}
+
+{% block content %}
+<h1>Druh poistenia: {{ insurance.insurance_type }}</h1>
+<p><strong><br>Poistná suma:</strong> {{ insurance.amount }} €</p>
+<p><strong>Popis:</strong> {{ insurance.description }}</p>
+<p><strong>Začiatok platnosti poistenia:</strong> {{ insurance.valid_from|date:"DATE_FORMAT" }}</p>
+<p><strong>Koniec platnosti poistenia:</strong> {{ insurance.valid_to|date:"DATE_FORMAT" }} </p>
+<p>
+    <a class="btn btn-secondary" href="{% url 'policyholder_detail' insurance.policyholder.pk %}">
+        späť
+    </a>
+</p>
+{% endblock %}

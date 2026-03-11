@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Poistenec{% endblock %}
+
+{% block content %}
+<p><h2>{{ policyholder.first_name }} {{ policyholder.last_name }}</h2></p>
+<p>Ulica: {{ policyholder.street }}</p>
+<p>Mesto: {{ policyholder.city }}</p>
+<p>PSČ: {{ policyholder.postal_code }}</p>
+
+<p><h4>Prehľad</h4></p>
+<p>Počet poistení: {{ insurance_count }}</p>
+
+<p><h2>Poistenia:</h2></p>
+{% if user.is_authenticated %}
+<table class="table table-bordered" border="1">
+    <thead>
+        <tr>
+            <th>P.č.</th>
+            <th>Druh poistenia</th>
+            <th>Predmet poistenia</th>
+            <th>Suma</th>
+            <th>Akcie</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for insurance in policyholder.insurances.all %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ insurance.insurance_type }}</td>
+            <td>{{ insurance.insured_object }}</td>
+            <td>{{ insurance.amount }}</td>
+            <td>
+                <a class="btn btn-secondary" href="{% url 'insurance_detail' insurance.pk %}">Detail</a>
+                {% if user.is_staff %}
+                <a class="btn btn-delete" href="{% url 'insurance_delete' insurance.pk %}">
+                    Odstraniť
+                </a>
+                <a class="btn btn-edit" href="{% url 'insurance_update' insurance.pk %}">
+                    Editovať
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">
+                Žiadne poistenie
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="actions-bar">
+    <div class="actions-left">
+        {% if user.is_staff %}
+        <a class = "btn btn-secondary" href="{% url 'policyholder_list' %}">Späť</a>
+        {% else %}
+        <a class = "btn btn-secondary" href="{% url 'my_account' %}">Môj účet</a>
+        {% endif %}
+    </div>
+
+    <div class="actions-center">
+        <a class="btn btn-secondary" href="{% url 'insurance_create'%}">
+            Pridať poistenie
+        </a>
+        {% if user.is_staff %}
+        <a class="btn btn-edit" href="{% url 'policyholder_update' policyholder.pk %}">Editovať poistenca</a>
+        <a class="btn btn-delete" href="{% url 'policyholder_delete' policyholder.pk %}" >Odstraniť poistenca</a>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

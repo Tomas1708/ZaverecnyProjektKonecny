@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Zoznam poistení{% endblock %}
+{% block content %}
+<h3>Zoznam poistení</h3>
+<table class="table table-bordered" >
+    <thead>
+        <tr>
+            <th>Druh poistenia</th>
+            <th>Poistenec</th>
+            <th>Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for insurance in insurances %}
+        <tr>
+            <td>
+                <a href="{% url 'insurance_detail' insurance.pk %}">
+                    {{ insurance.insurance_type }}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'policyholder_detail' insurance.policyholder.pk %}">
+                    {{ insurance.policyholder }}
+                </a>
+            </td>
+            <td>{{ insurance.amount }} €</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Žiadne poistenia</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

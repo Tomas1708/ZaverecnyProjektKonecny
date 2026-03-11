@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Prihlasenie{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.username|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.password|as_crispy_field }}
+        </div>
+    </div>
+    <button class="btn btn-secondary" type="submit">Prihlasiť sa</button>
+</form>
+{% endblock %}

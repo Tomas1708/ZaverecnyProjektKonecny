@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
-class PoistenciConfig(AppConfig):
+class PolicyholderConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'poistenci'
+    name = 'policyholders'

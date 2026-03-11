@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Domovská stránka{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <h2>Vitaj {{ user.username }}</h2>
+{% else %}
+    <h2>Vitaj v aplikácii!</h2>
+{% endif %}
+
+{% endblock %}

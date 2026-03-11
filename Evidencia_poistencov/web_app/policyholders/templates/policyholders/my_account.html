@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Môj profil{% endblock %}
+
+{% block content %}
+<h1>Môj profil</h1>
+<p>Meno: {{ policyholder.first_name }}</p>
+<p>Priezvisko: {{ policyholder.last_name }}</p>
+<p>Email: {{ request.user.email }}</p>
+<p>Vek: {{ policyholder.age }}</p>
+<div class="nav-left">
+    <a class="btn btn-secondary" href="{% url 'my_account_update' %}">
+        Editovať profil
+    </a>
+    <a class="btn btn-secondary" href="{% url 'policyholder_detail' policyholder.pk %}">Späť</a>
+</div>
+{% endblock %}

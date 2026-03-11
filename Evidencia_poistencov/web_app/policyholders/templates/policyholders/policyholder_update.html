@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Úprava poistenca{% endblock %}
+{% block content %}
+<h2>Upraviť poistenca</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-secondary" type="submit">
+        Uloziť zmeny
+    </button>
+    {% if user.is_staff %}
+    <a class="btn btn-secondary" href="{% url 'policyholder_list' %}">
+        Zrušiť
+    </a>
+    {% else %}
+     <a class="btn btn-secondary" href="{% url 'insurance_list' %}">
+        Zrušiť
+    </a>
+    {% endif %}
+</form>
+{% endblock %}

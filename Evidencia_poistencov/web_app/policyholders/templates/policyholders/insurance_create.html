@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Vytvorenie poistenia{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <h2>Pridať poistenie</h2>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.insurance_type|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.description|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.amount|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+            {{ form.insured_object|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.valid_from|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+            {{ form.valid_to|as_crispy_field }}
+        </div>
+    </div>
+    <button class="btn btn-secondary" type="submit">Uložiť</button>
+    <a class="btn btn-secondary" href="{% url 'policyholder_detail' request.user.policyholder.pk %}">
+        späť
+    </a>
+</form>
+{% endblock %}
