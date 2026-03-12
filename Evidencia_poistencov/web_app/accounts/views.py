@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.urls import reverse_lazy
+
 from .forms import RegistrationForm, LoginForm
 from policyholders.models import Policyholder
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
-
+from django.contrib.auth.views import LoginView, FormView
+from django.views.generic.base import RedirectView
 
 
 # Create your views here.
@@ -12,29 +13,23 @@ class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
     authentication_form = LoginForm
 
+class RegistrationView(FormView):
+    template_name = 'accounts/register.html'
+    form_class = RegistrationForm
+    success_url = reverse_lazy('login')
 
-def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request,"Registrácia prebehla úspešne.")
+        return super().form_valid(form)
 
-        if form.is_valid():
-            form.save()
-            messages.success(request,"Registrácia prebehla úspešne.")
-            return redirect('login')
+class InsuranceRedirectectView(LoginRequiredMixin, RedirectView):
+    permanent = False
 
-    else:
-        form = RegistrationForm()
-
-    return render(request, 'accounts/register.html',{'form':form})
-
-
-@login_required
-def insurance_redirect(request):
-    if request.user.is_staff:
-        return redirect('insurance_list')
-    else:
-        policyholder = request.user.policyholder
-        return redirect('policyholder_detail', pk=policyholder.pk)
-
+    def get_redirect_url(self, *args, **kwargs):
+        if self.request.user.is_staff:
+            return reverse_lazy('insurance_list')
+        else:
+            return reverse_lazy('policyholder_detail', kwargs={'pk':self.request.user.rpolicyholder.pk})
 
 

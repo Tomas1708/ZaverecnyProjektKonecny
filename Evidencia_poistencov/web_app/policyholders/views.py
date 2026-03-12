@@ -152,29 +152,3 @@ class MyAccountUpdateView(LoginRequiredMixin, CurrentPolicyholderMixin, UpdateVi
     fields = ['first_name', 'age']
     template_name = 'policyholders/my_account_update.html'
     success_url = reverse_lazy('my_account')
-
-
-"""
-class DashboardView(LoginRequiredMixin, TemplateView):
-    template_name = "policyholders/dashboard.html"
-
-    #metóda zabezpečuje, aby poistenia boli obmedzené v závislosti od roly
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        queryset = Poistenie.objects.all()
-        if self.request.user.is_staff:
-            #admin
-            context['pocet_poistencov'] = Poistenec.objects.count()
-        else:
-            queryset = queryset.filter(
-                poistenec=self.request.user.poistenec
-            )
-        context['poistenia'] = queryset
-        context['pocet_poisteni'] = queryset.count()    #počíta existujúce poistenia
-
-        return context
-"""
-
-
-

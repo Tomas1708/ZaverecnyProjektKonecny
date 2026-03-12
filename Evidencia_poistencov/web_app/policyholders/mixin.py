@@ -4,8 +4,8 @@ from django.urls import reverse_lazy
 
 class InsuranceOwnOrStaffMixin(UserPassesTestMixin):
 
-    """Bežný používateľ môže vymazať len svoje poistenia, cudzí -> 403 Forbidden
-       Admin/Staff môže"""
+    """Umožňuje bežnému používateľovi upravovať alebo mazať len svoje poistenia.
+       Admin/Staff môže upravovať, mazať všetky."""
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -21,7 +21,8 @@ class InsuranceOwnOrStaffMixin(UserPassesTestMixin):
         )
 
 class UserInsuranceQuerySetMixin:
-    """Bežný user vidí len svoje poistenia, admin/staff vidí všetky"""
+    """Obmedzuje zobrazenie poistiek na aktuálneho poistenca.
+    Admin/staff vidí všetký poistky."""
     def get_queryset(self):
         qs = super().get_queryset()
 
@@ -33,11 +34,12 @@ class UserInsuranceQuerySetMixin:
 
 
 class StaffRequiredMixin(UserPassesTestMixin):
-    """metóda umožňuje robiť zmeny len Adminovy"""
+    """Umožňuje zmeny len používateľom so staff právami."""
     def test_func(self):
         return self.request.user.is_staff
 
 class InsuranceSuccessUrlMixin:
+    """Zabezpečuje presmerovanie na detail poistenca po úspešnom vytvorení alebo aktualizácii poistenia."""
     def get_success_url(self):
         return reverse_lazy(
             "policyholder_detail",
@@ -45,5 +47,6 @@ class InsuranceSuccessUrlMixin:
         )
 
 class CurrentPolicyholderMixin:
+    """Vracia poistenec objekt priradený k aktuálnemu prihlásenému používateľovi. """
     def get_object(self):
         return self.request.user.policyholder

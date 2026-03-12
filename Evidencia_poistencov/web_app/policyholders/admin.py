@@ -14,3 +14,4 @@ class InsuranceAdmin(admin.ModelAdmin):
     list_filter = ("policyholder",)
 
 
+

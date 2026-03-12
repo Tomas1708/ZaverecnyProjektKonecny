@@ -40,8 +40,8 @@ class InsuranceForm(forms.ModelForm):
         widgets = {
             "description": forms.Textarea(attrs={'rows': 3}),
             "amount": forms.NumberInput(attrs={"min": 0, "step": 0.01}),
-            "valid_from": forms.DateInput(attrs={'type': 'date'}),
-            "valid_to": forms.DateInput(attrs={'type': 'date'}),
+            "valid_from": forms.DateInput(attrs={'type': 'date'}, format="%Y-%m-%d"),
+            "valid_to": forms.DateInput(attrs={'type': 'date'}, format="%Y-%m-%d"),
         }
 
 class PolicyholdersSearchForm(forms.Form):

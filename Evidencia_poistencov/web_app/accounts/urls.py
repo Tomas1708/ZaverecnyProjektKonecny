@@ -1,12 +1,12 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import register, insurance_redirect, CustomLoginView
+from .views import RegistrationView, InsuranceRedirectectView, CustomLoginView
 
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/',LogoutView.as_view(), name='logout'),
-    path('register/', register, name='register'),
+    path('register/', RegistrationView.as_view(), name='register'),
 
     #USER dashboard
-    path('insurances/', insurance_redirect, name='insurance_redirect'),
+    path('insurances/', InsuranceRedirectectView.as_view(), name='insurance_redirect'),
 ]
