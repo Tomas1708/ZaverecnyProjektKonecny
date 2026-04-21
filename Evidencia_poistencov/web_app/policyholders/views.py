@@ -22,6 +22,7 @@ class PolicyholderListView(LoginRequiredMixin,StaffRequiredMixin,ListView):
     model = Policyholder
     template_name = "policyholders/policyholder_list.html" #cesta k šablone
     context_object_name = "policyholders"  #ako to budeme volať v šablone(templates)
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = Policyholder.objects.all()
