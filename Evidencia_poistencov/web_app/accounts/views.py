@@ -23,13 +23,13 @@ class RegistrationView(FormView):
         messages.success(self.request,"Registrácia prebehla úspešne.")
         return super().form_valid(form)
 
-class InsuranceRedirectectView(LoginRequiredMixin, RedirectView):
+class InsuranceRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
         if self.request.user.is_staff:
             return reverse_lazy('insurance_list')
         else:
-            return reverse_lazy('policyholder_detail', kwargs={'pk':self.request.user.rpolicyholder.pk})
+            return reverse_lazy('policyholder_detail', kwargs={'pk':self.request.user.policyholder.pk})
 
 

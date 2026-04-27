@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from .views import RegistrationView, InsuranceRedirectectView, CustomLoginView
+from .views import RegistrationView, InsuranceRedirectView, CustomLoginView
 
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
@@ -8,5 +8,5 @@ urlpatterns = [
     path('register/', RegistrationView.as_view(), name='register'),
 
     #USER dashboard
-    path('insurances/', InsuranceRedirectectView.as_view(), name='insurance_redirect'),
+    path('insurances/', InsuranceRedirectView.as_view(), name='insurance_redirect'),
 ]
