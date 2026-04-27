@@ -141,7 +141,7 @@ class InsuranceListView(LoginRequiredMixin, UserInsuranceQuerySetMixin, ListView
     model = Insurance
     template_name = "policyholders/insurance_list.html"
     context_object_name = "insurances"
-
+    paginate_by = 1
 
 """Detail a Update profilu"""
 class MyAccountDetailView(LoginRequiredMixin, CurrentPolicyholderMixin, DetailView):
