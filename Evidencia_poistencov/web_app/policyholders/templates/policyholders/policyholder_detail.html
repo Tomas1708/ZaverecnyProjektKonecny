@@ -2,11 +2,15 @@
 {% block title %}Poistenec{% endblock %}
 
 {% block content %}
-<p><h2>{{ policyholder.first_name }} {{ policyholder.last_name }}</h2></p>
-<p>Ulica: {{ policyholder.street }}</p>
-<p>Mesto: {{ policyholder.city }}</p>
-<p>PSČ: {{ policyholder.postal_code }}</p>
-
+{% load static %}
+<div class="clearfix">
+    <img class="float-start me-3 border rounded-circle" src="{% static 'images/man.png' %}" alt="Avatar"
+         width="140" height="150">
+    <h2>{{ policyholder.first_name }} {{ policyholder.last_name }}</h2>
+    <p>Ulica: {{ policyholder.street }}</p>
+    <p>Mesto: {{ policyholder.city }}</p>
+    <p>PSČ: {{ policyholder.postal_code }}</p>
+</div>
 <p><h4>Prehľad</h4></p>
 <p>Počet poistení: {{ insurance_count }}</p>
 
