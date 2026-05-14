@@ -24,8 +24,7 @@
         Pridať poistenca
     </a>
 </p>
-
-
+{% if user.is_staff %}
 <div class="container mt-4">
     <table class="table table-bordered">
         <thead>
@@ -73,7 +72,7 @@
                     <a class="page-link" href="?page=1">&laquo;</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Predchadz.</a>
                 </li>
             {% endif %}
 
@@ -90,7 +89,7 @@
 
             {% if page_obj.has_next %}
                 <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Ďalšia</a>
                 </li>
                 <li class="page-item">
                     <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
@@ -99,5 +98,5 @@
         </ul>
     </nav>
 </div>
-
+{% endif %}
 {% endblock %}
